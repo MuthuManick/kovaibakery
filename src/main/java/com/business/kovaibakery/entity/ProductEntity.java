@@ -13,7 +13,7 @@ public class ProductEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@Column(name = "name")
 	private String name;
@@ -27,11 +27,11 @@ public class ProductEntity {
 	@Column(name = "priceperunit")
 	private int pricePerUnit;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -72,7 +72,7 @@ public class ProductEntity {
 		
 	}
 
-	public ProductEntity(int id, String name, String category, String description, int pricePerUnit) {
+	public ProductEntity(long id, String name, String category, String description, int pricePerUnit) {
 		super();
 		this.id = id;
 		this.name = name;
