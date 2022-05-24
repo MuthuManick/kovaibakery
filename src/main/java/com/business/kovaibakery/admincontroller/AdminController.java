@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.business.kovaibakery.admincontroller.exception.RecordNotFoundException;
 import com.business.kovaibakery.entity.AdminUsersEntity;
+import com.business.kovaibakery.entity.OrderEntity;
 import com.business.kovaibakery.entity.ProductEntity;
 import com.business.kovaibakery.exception.UserNotLoggedIn;
 import com.business.kovaibakery.model.LoginModel;
 import com.business.kovaibakery.repository.AdminUsersRepository;
+import com.business.kovaibakery.repository.OrderRepository;
 import com.business.kovaibakery.repository.ProductRepository;
 
 @Controller
@@ -26,6 +28,9 @@ public class AdminController {
 
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Autowired
+	OrderRepository orderRepository;
 
 	@Autowired
 	AdminUsersRepository adminUsersRepository;
@@ -130,6 +135,21 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin-ui/";
+	}
+	
+	// Orders Module starts
+	
+	@RequestMapping("/orders")
+	public String getAllOrders(Model model) throws Exception {
+		List<OrderEntity> list = orderRepository.findAll();
+
+		model.addAttribute("orders", list);
+		
+		if(!isLoggedIn) {
+			//throw new UserNotLoggedIn();
+			return "Error";
+		}
+		return "list-orders";
 	}
 
 }
